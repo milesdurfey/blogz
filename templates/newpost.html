@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head><h1>Welcome! Please enter a new blog below:</h1></head>    
+        
+<form action='/newpost' method ='POST'>
+<p>
+    <label for ="title_of_blog">Enter a Blog Title:</label>
+    <input id ="title_of_blog" type = "text" name="title_of_blog"  value={{title_of_blog}} >
+    <span class="error">{{ title_error }}</span>
+</p>
+<p>
+    <label for = "body_of_blog">Enter a Body:</label>
+    <textarea name="body_of_blog" id = "body_of_blog" wrap = "hard" value={{body_of_blog}}>{{body_of_blog}}</textarea>
+    <span class="error">{{ body_error }}</span>
+</p>
+
+    <input type ="submit" value="Post Blog"/>
+</form>
+
+{% endblock %}
