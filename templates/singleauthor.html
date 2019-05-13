@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Blogz Author page</h1>
 <hr />
+<div>
 <ul>
     {% for blogpost in blog %}
         <li><a href='/blog?id={{blogpost.id}}'>{{blogpost.title}}</a></li>
@@ -10,4 +11,5 @@
         <p><small>Written by... <a href="/blog?user={{blogpost.owner_id}}">{{blogpost.owner.username}}</a></small></p>            
     {% endfor %}
 </ul>
+</div>
 {% endblock %}

@@ -35,13 +35,14 @@ class User(db.Model):
 def require_login():
     allowed_routes = ['login', 'signup', 'index', 'blog_display']
     if request.endpoint not in allowed_routes and'username' not in session:
+        flash ("Redirected to login page", 'FYI')
         return redirect('/login')
 
 
 @app.route("/", methods=['POST','GET'])
 def index():
     all_users = User.query.all()
-    return render_template('index.html', title="Loading Page", all_users=all_users)
+    return render_template('index.html', title="Index", all_users=all_users)
 
 
 @app.route('/login', methods=['POST','GET'])
@@ -57,7 +58,7 @@ def login():
         else:
             flash('User password incorrect, or user does not exist', 'error')
             
-    return render_template('login.html')
+    return render_template('login.html', title = "Login")
 
 
 @app.route('/signup', methods=['POST','GET'])
@@ -178,9 +179,9 @@ def blog_display():
         return render_template('singleentry.html', title = "Single Blog Entry", blog = display_blog, id = display_id)
     if display_user:
         display_blog = Blog.query.filter_by(owner_id = display_user)
-        return render_template('singleauthor.html', title = "Author's Blogs", blog = display_blog)
+        return render_template('singleauthor.html', title = "Author's Blog Entries", blog = display_blog)
      
-    return render_template('blog.html', title = "All blogs", blog = display_blog)
+    return render_template('blog.html', title = "Main Blog Page", blog = display_blog)
 
 
 @app.route('/logout')
